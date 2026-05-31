@@ -939,36 +939,18 @@ async function nextStorySlide() {
             const rightTextContainer = document.getElementById('rightTextContainer');
             const rightPhotoContainer = document.getElementById('rightPhotoContainer');
             const rightPolaroidImage = document.getElementById('rightPolaroidImage');
-            const rightPhotoGrid = document.getElementById('rightPhotoGrid');
             const rightPolaroidCaption = document.getElementById('rightPolaroidCaption');
 
-            if (slide.rightImage || slide.rightImages) {
+            if (slide.rightImage) {
                 // Photo slide
                 if (rightTextContainer) rightTextContainer.style.display = 'none';
                 if (rightPhotoContainer) {
                     rightPhotoContainer.style.display = 'flex';
                 }
 
-                if (slide.rightImage) {
-                    if (rightPolaroidImage) {
-                        rightPolaroidImage.src = slide.rightImage;
-                        rightPolaroidImage.style.display = 'block';
-                    }
-                    if (rightPhotoGrid) rightPhotoGrid.style.display = 'none';
-                } else if (slide.rightImages) {
-                    if (rightPolaroidImage) rightPolaroidImage.style.display = 'none';
-                    if (rightPhotoGrid) {
-                        rightPhotoGrid.style.display = 'grid';
-                        const gridImgs = rightPhotoGrid.querySelectorAll('.grid-img');
-                        gridImgs.forEach((img, idx) => {
-                            if (slide.rightImages[idx]) {
-                                img.src = slide.rightImages[idx];
-                                img.style.display = 'block';
-                            } else {
-                                img.style.display = 'none';
-                            }
-                        });
-                    }
+                if (rightPolaroidImage) {
+                    rightPolaroidImage.src = slide.rightImage;
+                    rightPolaroidImage.style.display = 'block';
                 }
 
                 if (rightPolaroidCaption) {

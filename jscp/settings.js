@@ -122,12 +122,7 @@ let settings = {
         },
         {
             image: './image/foto-berdua/rispan-5.jpg',
-            rightImages: [
-                './image/foto-berdua/rispan-6.jpg',
-                './image/foto-berdua/rispan-7.jpg',
-                './image/foto-berdua/rispan-1.jpg',
-                './image/foto-berdua/rispan-2.jpg'
-            ]
+            rightImage: './image/foto-berdua/rispan-6.jpg'
         }
     ],
     galleryImages: [
@@ -147,8 +142,7 @@ let settings = {
         './image/foto-berdua/rispan-3.jpg',
         './image/foto-berdua/rispan-4.jpg',
         './image/foto-berdua/rispan-5.jpg',
-        './image/foto-berdua/rispan-6.jpg',
-        './image/foto-berdua/rispan-7.jpg'
+        './image/foto-berdua/rispan-6.jpg'
     ]
 };
 
@@ -168,8 +162,8 @@ function initializeDefaultSettings() {
                 if (parsed.music && (parsed.music.includes('happybirtday.mp3') || parsed.music.includes('happybirtday_uia.mp3'))) {
                     parsed.music = './music/happybirthday.mp3';
                 }
-                // Force update storySlides if they don't match the new design length, are the old defaults, or have titles on couple slides
-                if (parsed.storySlides && (parsed.storySlides.length !== settings.storySlides.length || parsed.storySlides.length === 5 || parsed.storySlides[1]?.title)) {
+                // Force update storySlides if they don't match the new design length, are the old defaults, or contain the deleted rispan-7.jpg
+                if (parsed.storySlides && (parsed.storySlides.length !== settings.storySlides.length || parsed.storySlides.length === 5 || JSON.stringify(parsed.storySlides).includes('rispan-7.jpg'))) {
                     parsed.storySlides = settings.storySlides;
                     parsed.galleryImages = settings.galleryImages;
                 }
