@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Made For Aline 🎁</title>
+
+    <meta name="description"
+        content="Buku memori indah dan ucapan ulang tahun spesial yang dibuat dengan cinta untuk Aline.">
+    <meta property="og:title" content="Made For Aline 🎁">
+    <meta property="og:description"
+        content="Buku memori indah dan ucapan ulang tahun spesial yang dibuat dengan cinta untuk Aline.">
+    <meta property="og:type" content="website">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Pacifico&family=Inter:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="image/favicon.png">
+
+    <!-- Custom Style Sheet -->
+    <link rel="stylesheet" href="css/index.css?v=1.2">
+</head>
+
+<body>
+    <!-- Background Rain & Particles Canvas -->
+    <canvas id="matrix-rain"></canvas>
+    <canvas class="canvas"></canvas>
+
+    <!-- Overlay & Twinkling Stars -->
+    <div class="overlay">
+        <div class="stars-container" id="starsContainer"></div>
+
+        <!-- Beautiful Glowing Moon -->
+        <div class="moon"></div>
+
+        <!-- Opening Gift GIF -->
+        <img id="gift-image" src="" alt="Celebration GIF" />
+
+        <!-- Typewriter text box overlay for each page -->
+        <div class="content-display" id="contentDisplay" style="display: none;">
+            <p id="contentText"></p>
+        </div>
+
+        <!-- Firework particles container -->
+        <div class="firework-container" id="fireworkContainer"></div>
+
+        <!-- Polaroid Container (Book Layout) -->
+        <div class="polaroid-container" id="polaroidContainer" style="display: none;">
+            <div class="polaroid-card book-wrapper" id="polaroidCard">
+                <!-- Left Page (Photo) -->
+                <div class="book-page left-page">
+                    <div class="polaroid-frame">
+                        <!-- Decorative sunflowers and hearts -->
+                        <div class="deco-item deco-sunflower top-left" style="position: absolute;">🌻</div>
+                        <div class="deco-item deco-heart top-right" style="position: absolute;">❤️</div>
+                        <div class="deco-item deco-heart bottom-left" style="position: absolute;">❤️</div>
+                        <div class="deco-item deco-sunflower bottom-right" style="position: absolute;">🌻</div>
+
+                        <img id="polaroidImage" src="./image/IMG_0033.jpeg" alt="Aline 💖" />
+                        <div class="polaroid-caption">Aline 💖</div>
+                        
+                        <!-- Moved tapContinueBtn here -->
+                        <button id="tapContinueBtn" style="display: none; margin-top: 10px;">
+                            Tap here ➔
+                        </button>
+                    </div>
+                </div>
+                <!-- Spine -->
+                <div class="book-spine"></div>
+                <!-- Right Page (Text or Photo) -->
+                <div class="book-page right-page">
+                    <div class="book-text-frame" style="position: relative;">
+                        <!-- Text display -->
+                        <div class="content-display-polaroid" id="rightTextContainer">
+                            <p id="specialTextDisplay"></p>
+                        </div>
+                        
+                        <!-- Photo display for couple gallery slides -->
+                        <div class="right-photo-frame" id="rightPhotoContainer"
+                            style="display: none; width: 100%; height: auto; flex-direction: column; justify-content: space-between; align-items: center; position: relative;">
+                            <!-- Decorative sunflowers and hearts -->
+                            <div class="deco-item deco-sunflower top-left" style="position: absolute;">🌻</div>
+                            <div class="deco-item deco-heart top-right" style="position: absolute;">❤️</div>
+                            <div class="deco-item deco-heart bottom-left" style="position: absolute;">❤️</div>
+                            <div class="deco-item deco-sunflower bottom-right" style="position: absolute;">🌻</div>
+
+                            <img id="rightPolaroidImage" src="" alt="Kenangan 💖"
+                                style="width: 100%; height: 250px; object-fit: contain; border: 1px solid #e2e2e2; background: #f7f7f7; box-shadow: 0 4px 10px rgba(0,0,0,0.1);" />
+                            <div id="rightPhotoGrid"
+                                style="display: none; width: 100%; height: 250px; grid-template-columns: repeat(2, 1fr); grid-template-rows: repeat(2, 1fr); gap: 6px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #e2e2e2; background: #f7f7f7; padding: 4px; box-sizing: border-box;">
+                                <img class="grid-img" src=""
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #f7f7f7;" />
+                                <img class="grid-img" src=""
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #f7f7f7;" />
+                                <img class="grid-img" src=""
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #f7f7f7;" />
+                                <img class="grid-img" src=""
+                                    style="width: 100%; height: 100%; object-fit: contain; border-radius: 4px; background: #f7f7f7;" />
+                            </div>
+                            <div class="polaroid-caption" id="rightPolaroidCaption">Kenangan 💖</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Music Control Button -->
+        <button class="music-control" id="musicControl" title="Play/Pause Music">
+            ▶
+        </button>
+
+        <!-- Configuration panel modal -->
+        <div id="settingsModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>⚙️ Pengaturan Website</h2>
+                    <span class="close">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <!-- Music Config -->
+                    <div class="settings-section">
+                        <h3>🎵 Pengaturan Suara</h3>
+                        <div class="form-group">
+                            <label for="backgroundMusic">Musik Latar:</label>
+                            <div class="music-select-row">
+                                <select id="backgroundMusic">
+                                    <option value="" disabled selected>Memuat...</option>
+                                </select>
+                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Coba
+                                    Dengar</button>
+                            </div>
+                            <span id="musicPreviewStatus" class="music-preview-status">Pilih lagu lalu tes</span>
+                        </div>
+                    </div>
+
+                    <!-- Countdown Config -->
+                    <div class="settings-section">
+                        <h3>⏰ Pengaturan Waktu</h3>
+                        <div class="form-group">
+                            <label for="countdownTime">Waktu Hitung Mundur:</label>
+                            <select id="countdownTime">
+                                <option value="3">3 Detik</option>
+                                <option value="5">5 Detik</option>
+                                <option value="10">10 Detik</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Falling text rain matrix Config -->
+                    <div class="settings-section">
+                        <h3>🌧️ Efek Hujan Tulisan</h3>
+                        <div class="form-group">
+                            <label for="matrixText">Tulisan hujan:</label>
+                            <input type="text" id="matrixText" value="HAPPYBIRTHDAYALINE"
+                                placeholder="Masukkan teks hujan">
+                        </div>
+                        <div class="form-group">
+                            <label>Pilih warna tema:</label>
+                            <div class="color-theme-buttons">
+                                <button type="button" class="color-theme-btn active" data-theme="pink">
+                                    <div class="color-preview pink-preview"></div>
+                                    <span>Pink Romantis</span>
+                                </button>
+                                <button type="button" class="color-theme-btn" data-theme="blue">
+                                    <div class="color-preview blue-preview"></div>
+                                    <span>Biru Keren</span>
+                                </button>
+                                <button type="button" class="color-theme-btn" data-theme="purple">
+                                    <div class="color-preview purple-preview"></div>
+                                    <span>Ungu Fantasi</span>
+                                </button>
+                                <button type="button" class="color-theme-btn" data-theme="custom">
+                                    <div class="color-preview custom-preview"></div>
+                                    <span>Kustom</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="form-row" id="customColorSection" style="display: none;">
+                            <div class="form-group">
+                                <label for="matrixColor1">Warna hujan tulisan 1:</label>
+                                <input type="color" id="matrixColor1" value="#ff69b4">
+                            </div>
+                            <div class="form-group">
+                                <label for="matrixColor2">Warna hujan tulisan 2:</label>
+                                <input type="color" id="matrixColor2" value="#ff1493">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shape shifter sequences Config -->
+                    <div class="settings-section">
+                        <h3>✨ Pengaturan Tulisan Utama</h3>
+                        <div class="form-group">
+                            <label for="sequenceText">Konten Tulisan Utama:</label>
+                            <span
+                                style="color: rgb(132, 132, 132); font-weight: normal; font-size: 12px; display: block; margin-bottom: 5px;">
+                                Catatan: Gunakan | untuk memisahkan kata
+                            </span>
+                            <input type="text" id="sequenceText" value="HAPPY|BIRTHDAY|TO|ALINE|❤">
+                        </div>
+                        <div class="form-group" id="sequenceColorSection" style="display: none;">
+                            <label for="sequenceColor">Warna tulisan utama:</label>
+                            <input type="color" id="sequenceColor" value="#ff69b4">
+                        </div>
+                    </div>
+
+                    <!-- GIF config -->
+                    <div class="settings-section">
+                        <h3>🎁 Pengaturan Gambar GIF</h3>
+                        <div class="form-group">
+                            <label for="giftImage">Gambar GIF (Opsional):</label>
+                            <select id="giftImage">
+                                <option value="">Tidak Ada / None</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Polaroid & Heart configurations -->
+                    <div class="settings-section">
+                        <h3>📸 Pengaturan Polaroid & Teks</h3>
+                        <div class="form-group">
+                            <label for="polaroidImagePath">Foto Polaroid Utama (Path/URL):</label>
+                            <input type="text" id="polaroidImagePath" placeholder="e.g. ./image/aline_01.jpg">
+                        </div>
+                        <div class="form-group">
+                            <label for="specialMessageText">Pesan Spesial:</label>
+                            <textarea id="specialMessageText" rows="4"
+                                placeholder="Tulis ucapan romantis untuk Aline..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h3>💖 Pengaturan Hati Terbang</h3>
+                        <div class="form-group">
+                            <label for="enableHeart">Efek Foto Terbang Hati:</label>
+                            <select id="enableHeart">
+                                <option value="true">Aktif (On)</option>
+                                <option value="false">Nonaktif (Off)</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="galleryImagesSection">
+                            <label for="galleryImagesText">Daftar Foto Galeri (Pisahkan dengan koma atau baris
+                                baru):</label>
+                            <textarea id="galleryImagesText" rows="4"
+                                placeholder="e.g. ./image/aline_01.jpg, ./image/aline_02.jpg, ./image/aline_03.jpg"></textarea>
+                        </div>
+                    </div>
+
+                    <button id="applySettings" class="apply-settings-btn">🎉 Terapkan Pengaturan</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loop audio player -->
+        <audio id="birthdayAudio" loop>
+            <source src="music/happybirthday.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+
+        <!-- Device orientation landscape locking cover -->
+        <div id="orientation-lock">
+            <div class="phone-icon">📱</div>
+            <p style="margin-top: 15px; font-weight: 600;">Harap putar layar ponsel Anda ke posisi lanskap</p>
+        </div>
+
+        <!-- Fullscreen helper button for mobile -->
+        <button id="fullscreenBtn">
+            📺 Layar Penuh
+        </button>
+    </div>
+
+    <!-- SVG Chroma Key Filter for Green Screen -->
+    <svg width="0" height="0" style="position: absolute; pointer-events: none;">
+        <filter id="chroma-key-green">
+            <feColorMatrix type="matrix" values="
+                1 0 0 0 0
+                0 1 0 0 0
+                0 0 1 0 0
+                3 -5 3 1 0
+            " />
+        </filter>
+    </svg>
+
+    <!-- Scripts -->
+    <script src="jscp/ui.js"></script>
+    <script src="jscp/settings.js"></script>
+</body>
+
+</html>
